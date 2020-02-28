@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+
             android:contentDescription="TODO"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -50,31 +51,50 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_15" />
 
-        <ImageView
-            android:id="@+id/btn_like"
+        <RadioGroup
+            android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:contentDescription="TODO"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:srcCompat="@drawable/ic_thumb_up" />
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-        <ImageView
-            android:id="@+id/btn_dislike"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:contentDescription="TODO"
-            app:layout_constraintStart_toEndOf="@+id/likeCntText"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:srcCompat="@drawable/ic_thumb_down" />
+            <RadioButton
+                android:id="@+id/btn_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:button="@null"
+                android:contentDescription="TODO"
+                android:drawableLeft="@drawable/selector_like_button"
+                android:fontFamily="@font/roboto"
+                android:text="  50"
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp"
+
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <RadioButton
+                android:id="@+id/btn_dislike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:button="@null"
+                android:contentDescription="TODO"
+                android:drawableLeft="@drawable/selector_dislike_button"
+                android:fontFamily="@font/roboto"
+                android:text="  50"
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/likeCntText"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        </RadioGroup>
 
         <TextView
             android:id="@+id/textView"
@@ -103,33 +123,6 @@
             app:layout_constraintStart_toEndOf="@+id/imageView3"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-        <TextView
-            android:id="@+id/likeCntText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/roboto"
-            android:text="15"
-            android:textColor="@android:color/background_light"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/btn_like"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-        <TextView
-            android:id="@+id/dislikeCntText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/roboto"
-            android:text="1"
-            android:textColor="@android:color/background_light"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/btn_dislike"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -424,10 +417,9 @@
 
         <TextView
             android:id="@+id/textView15"
-            android:layout_width="187dp"
-            android:layout_height="47dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="54dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:background="#FF561D"
             android:gravity="center"
             android:padding="10dp"
