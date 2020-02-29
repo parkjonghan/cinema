@@ -1,5 +1,6 @@
 package com.kptech.cinema
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -14,17 +15,11 @@ class MainActivity : AppCompatActivity() {
     private  var likeBtnStatus : Int = -1; // -1은 아무것도 선택이되지 않은 상태, 0 : 선택되지 않은 상태 , 1: 선택된 상태
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         comment_list.adapter = MainAdapter()
         comment_list.layoutManager = LinearLayoutManager(this)
-
-        Log.d("MainActivity","MainActivity Create")
-        btn_like.text = App.prefs.myLikeCntText
-        btn_dislike.text = App.prefs.myDislikeCntText
-        likeBtnStatus = App.prefs.myLikeBntStatus
 
         btn_like.setOnClickListener {
 
@@ -36,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 disLikeCnt--
             btn_like.text = "  "+likeCnt.toString()
             btn_dislike.text = "  "+disLikeCnt.toString()
-            UpdatePreferences()
+            updatePreferences()
         }
 
         btn_dislike.setOnClickListener {
@@ -49,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                 likeCnt--
             btn_like.text = "  "+likeCnt.toString()
             btn_dislike.text = "  "+disLikeCnt.toString()
-            UpdatePreferences()
+            updatePreferences()
         }
 
 
@@ -64,11 +59,28 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun UpdatePreferences()
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+
+        btn_like.text = MySharedPref.LoadPrefLikeCntText(applicationContext)
+        btn_dislike.text = MySharedPref.LoadPrefDislikeCntText(applicationContext)
+        likeBtnStatus = MySharedPref.LoadPrefLikeBtnStatus(applicationContext)
+
+        if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                Toast.makeText(this, "세로모드", Toast.LENGTH_SHORT).show();
+         }
+
+         if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                Toast.makeText(this, "가로모드", Toast.LENGTH_SHORT).show();
+         }
+
+    }
+
+    fun updatePreferences()
     {
-        App.prefs.myLikeCntText = btn_like.text as String?
-        App.prefs.myDislikeCntText = btn_dislike.text as String?
-        App.prefs.myLikeBntStatus = likeBtnStatus
+        MySharedPref.SavePrefLikeCntText(applicationContext, btn_like.text as String?)
+        MySharedPref.SavePrefDislikeCntText(applicationContext, btn_dislike.text as String?)
+        MySharedPref.SavePrefLikeBtnStatus(applicationContext, likeBtnStatus)
         Log.d("MainActivity","like cnt :"+btn_like.text +"  dislike cnt :" + btn_dislike.text )
     }
 
